@@ -35,11 +35,19 @@ Route::get('/about', function () {
 Route::view("contact", "contact");
 Route::view('signup', 'signup');
 Route::view('addUser', 'addUser');
-Route::view('signup', 'signup');
+// Route::view('signup', 'signup');
+// Route::view('login', 'login');
+Route::view('noaccess', 'noaccess')->name('noaccess');
+
 Route::get('/datatest', [UserController::class, 'testData']);
 Route::get('/deleteUser/{id}', [UserController::class, 'deleteUser']);
 Route::post('/createUser', [UserController::class, 'signup']);
-
+Route::post('/login', [UserController::class, 'loginphp']);
+Route::group(['middleware' => ['protectedPage']], function(){
+    Route::view('signup', 'signup');
+    Route::view('contact', 'contact');
+    Route::view('login', 'login');
+});
 // Route::get('/{username}', function ($username) {
 //     return view('welcome', ['username' => $username]);
 // });

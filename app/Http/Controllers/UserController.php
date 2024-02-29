@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -35,9 +36,19 @@ class UserController extends Controller
         $data = $request->all();
         $data['is_admin'] = 0;
         Users::create($data);
+        Session::flash('message', 'Successfully register new user');
         return ('Signup Successfully');
     }
-    
+    public function login(Request $request){
+        $request->validate([
+            'email' => 'required||max:30',
+            'password' => 'required||min:5'
+        ]);
+
+        $data = $request->input();
+        $request->session()->put('user', $data['username']);
+        return redirect('home');
+    }
 
     public function index($user) {
         echo $user;
