@@ -17,9 +17,9 @@
     <form action="login" method="POST">
         @csrf
         <div>
-            <label for="email">Email: </label>
-            <input type="email" id="email" name="email" >
-            <span style="color:red">@error('email') {{ $message }} @enderror</span>
+            <label for="username">Email: </label>
+            <input type="username" id="username" name="username" >
+            <span style="color:red">@error('username') {{ $message }} @enderror</span>
         </div>
         <div>
             <label for="password">Password: </label>

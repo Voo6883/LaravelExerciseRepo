@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -33,7 +34,7 @@ class UserController extends Controller
         return Users::find(2)->getCompany;
     }
     public function signup(Request $request){
-        $data = $request->all();
+        $data = $request->only('name', 'email', 'password');
         $data['is_admin'] = 0;
         Users::create($data);
         Session::flash('message', 'Successfully register new user');
@@ -41,10 +42,9 @@ class UserController extends Controller
     }
     public function login(Request $request){
         $request->validate([
-            'email' => 'required||max:30',
-            'password' => 'required||min:5'
+            'username' => 'required|max:30',
+            'password' => 'required|min:5'
         ]);
-
         $data = $request->input();
         $request->session()->put('user', $data['username']);
         return redirect('home');

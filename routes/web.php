@@ -38,16 +38,33 @@ Route::view('addUser', 'addUser');
 // Route::view('signup', 'signup');
 // Route::view('login', 'login');
 Route::view('noaccess', 'noaccess')->name('noaccess');
+Route::view('home', 'welcome');
 
 Route::get('/datatest', [UserController::class, 'testData']);
 Route::get('/deleteUser/{id}', [UserController::class, 'deleteUser']);
 Route::post('/createUser', [UserController::class, 'signup']);
-Route::post('/login', [UserController::class, 'loginphp']);
+Route::post('/login', [UserController::class, 'login']);
 Route::group(['middleware' => ['protectedPage']], function(){
     Route::view('signup', 'signup');
     Route::view('contact', 'contact');
     Route::view('login', 'login');
 });
+
+Route::get('login', function(){
+    if(session()->has('user')){
+        return redirect('home');
+    }
+    return view('login');
+});
+Route::post('login', [UserController::class, 'login']);
+Route::get('logout', function(){
+    if(session()->has('user')){
+        session()->pull('user');
+    }
+    return redirect('login');
+});
+
+
 // Route::get('/{username}', function ($username) {
 //     return view('welcome', ['username' => $username]);
 // });

@@ -11,15 +11,19 @@
         @csrf
         <div>
             <label for="name">Name: </label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" >
         </div>
         <div>
             <label for="email">Email: </label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" >
         </div>
         <div>
             <label for="password">Password: </label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" >
+        </div>
+        <div>
+            <label for="confirm-pass">Confirm Password: </label>
+            <input type="password" id="password" name="password" >
         </div>
         <button type="submit">Sign Up</button>
     </form>

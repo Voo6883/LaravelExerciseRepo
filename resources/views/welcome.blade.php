@@ -21,6 +21,7 @@
         </style>
     </head>
     <body class="antialiased">
+        <h1>Hello, {{session('user')}}</h1>
         <a href='/about' style="color: blue"> About Us </a> </t>
         <a href='/contact' style="color: blue"> Contact Us </a>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
